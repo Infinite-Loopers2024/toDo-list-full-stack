@@ -7,9 +7,8 @@ const server = http
     if (req.url) {
       res.end("Hej'");
     }
-  })
-  .listen(port);
+  });
 
-server.on("listening on port", () => {
-  console.log(server.address());
+server.listen(port, () => {
+  console.log(`Listening on ${port}`);
 });
