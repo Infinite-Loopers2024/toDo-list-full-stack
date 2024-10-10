@@ -2,7 +2,7 @@ import http from "http";
 import fs from "fs";
 import path from "path";
 
-let todos = ["Do the dishes.", "Clean the bathroom.", "Walk the dog."];
+const db = require("../db");
 
 const port = 3000;
 const server = http.createServer((req, res) => {
@@ -24,17 +24,29 @@ const server = http.createServer((req, res) => {
       console.log(body);
     });
 
+    const updatedDbContent = `
+const books = ${JSON.stringify(db.books, null, 2)};
+
+module.exports = { books };
+  `;
     req.on("end", () => {
       const parsedBody = new URLSearchParams(body);
       const newTodo = parsedBody.get("Todo");
 
       if (newTodo) {
-        todos.push(newTodo);
-        res.writeHead(302, { Location: "/" });
-        res.end();
-      } else {
-        res.writeHead(400, { "Content-Type": "text/plain" });
-        res.end("Bad Request");
+        db.books.push(newTodo);
+        fs.writeFile(
+          path.join(__dirname, "../db.js"),
+          updatedDbContent,
+          (err) => {
+            if (err) {
+              res.writeHead(500);
+              return;
+            }
+            res.writeHead(200);
+            res.end("Todo added");
+          }
+        );
       }
     });
   } else {
