@@ -5,13 +5,10 @@ import * as db from "./db";
 
 const port = 8080;
 const server = http.createServer((req, res) => {
-  console.log("Request recived")
-  const headers = {
-    "Access-Control-Allow-Origin": "*" /* @dev First, read about security */,
-    "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
-    "Access-Control-Max-Age": 2592000, // 30 days
-    /** add other headers as per requirement */
-  };
+  console.log("Request recived");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.url === "/add-todo" && req.method === "POST") {
     let body = "";
 
@@ -53,7 +50,7 @@ const server = http.createServer((req, res) => {
       }
     });
   } else if (req.url === "/task" && req.method === "GET") {
-    res.writeHead(200, { ...headers, "Content-Type": "application/json" });
+    res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(db.toDo));
   } else {
     res.writeHead(500, { "Content-Type": "text/plain" });

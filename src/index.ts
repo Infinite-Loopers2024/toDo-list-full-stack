@@ -1,5 +1,3 @@
-document.body.style.backgroundColor = "lightblue";
-
 function getTodos() {
   fetch("http://localhost:8080/task")
     .then((response) => response.json())
@@ -11,8 +9,7 @@ function getTodos() {
         const bookDiv = document.createElement("div");
         bookDiv.classList.add("books");
         bookDiv.innerHTML = `
-        <ul>>${todo.id}</ul>
-        <li>${todo.name}</h5>
+        <li>${todo.name}</li>
 
         `;
         container.appendChild(bookDiv);
