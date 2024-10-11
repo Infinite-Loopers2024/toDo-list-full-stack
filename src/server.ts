@@ -49,7 +49,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(db.toDo));
   } else {
-    res.writeHead(404, { "Content-Type": "text/plain" });
+    res.writeHead(500, { "Content-Type": "text/plain" });
     res.end("Not Found");
   }
 });

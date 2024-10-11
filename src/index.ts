@@ -1,7 +1,7 @@
 document.body.style.backgroundColor = "lightblue";
 
 function getTodos() {
-  fetch("/task")
+  fetch("http://localhost:8080/task")
     .then((response) => response.json())
     .then((toDos) => {
       const container = document.querySelector(".container")!;
