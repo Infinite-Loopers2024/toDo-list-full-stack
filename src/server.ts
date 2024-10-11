@@ -29,7 +29,8 @@ const server = http.createServer((req, res) => {
       const newTodo = parsedBody.get("Todo");
 
       if (newTodo) {
-        db.toDo.push(newTodo);
+        const todoObject = { id: db.toDo.length + 1, name: newTodo };
+        db.toDo.push(todoObject);
 
         const updatedDbContent = `
 const toDo = ${JSON.stringify(db.toDo, null, 2)};

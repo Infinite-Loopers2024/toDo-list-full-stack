@@ -12,20 +12,10 @@ const toDo = [
     "id": 3,
     "name": "The"
   },
-  "tst",
-  "hej hej",
-  "tst",
-  "tt",
-  "tst",
-  "tst",
-  "tst",
-  "tst",
-  "tst",
-  "tst",
-  "tst",
-  "tswt",
-  "stst",
-  "tstsdfsdfsdf"
+  {
+    "id": 4,
+    "name": "hej"
+  }
 ];
 
 module.exports = { toDo };
