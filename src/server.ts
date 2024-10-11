@@ -33,9 +33,9 @@ const server = http.createServer((req, res) => {
         db.toDo.push(todoObject);
 
         const updatedDbContent = `
-const toDo = ${JSON.stringify(db.toDo, null, 2)};
+          const toDo = ${JSON.stringify(db.toDo, null, 2)};
 
-module.exports = { toDo };
+          module.exports = { toDo };
         `;
 
         fs.writeFile(
@@ -57,6 +57,9 @@ module.exports = { toDo };
         res.end("Invalid");
       }
     });
+  } else if (req.url === "/task" && req.method === "GET") {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(db.toDo));
   } else {
     res.writeHead(404, { "Content-Type": "text/plain" });
     res.end("Not Found");
