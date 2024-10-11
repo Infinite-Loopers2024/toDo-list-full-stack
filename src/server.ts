@@ -1,8 +1,7 @@
 import http from "http";
 import fs from "fs";
 import path from "path";
-
-const db = require("../db");
+import * as db from "./db";
 
 const port = 3000;
 const server = http.createServer((req, res) => {

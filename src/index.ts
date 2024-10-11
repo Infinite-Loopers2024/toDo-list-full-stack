@@ -4,10 +4,10 @@ function getTodos() {
   fetch("/task")
     .then((response) => response.json())
     .then((toDos) => {
-      const container = document.querySelector(".container");
+      const container = document.querySelector(".container")!;
       container.innerHTML = "";
 
-      toDos.forEach((todo) => {
+      toDos.forEach((todo: { id: number; name: string }) => {
         const bookDiv = document.createElement("div");
         bookDiv.classList.add("books");
         bookDiv.innerHTML = `
