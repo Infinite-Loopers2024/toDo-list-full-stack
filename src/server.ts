@@ -6,29 +6,7 @@ const db = require("../db");
 
 const port = 3000;
 const server = http.createServer((req, res) => {
-  if (req.url === "/" && req.method === "GET") {
-    const filePath = path.join(__dirname, "../index.html");
-    fs.readFile(filePath, (err, content) => {
-      if (err) {
-        res.writeHead(500);
-        res.end("Internal Server Error");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(content);
-    });
-  } else if (req.url === "../src/index.js" && req.method === "GET") {
-    const filePath = path.join(__dirname, "index.js");
-    fs.readFile(filePath, (err, content) => {
-      if (err) {
-        res.writeHead(500);
-        res.end("Internal Server Error");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "application/javascript" });
-      res.end(content);
-    });
-  } else if (req.url === "/add-todo" && req.method === "POST") {
+  if (req.url === "/add-todo" && req.method === "POST") {
     let body = "";
 
     req.on("data", (chunk) => {
